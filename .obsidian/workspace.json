@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "d1a315cd19f96773",
@@ -170,6 +171,10 @@
   },
   "active": "72ca02d069061ca6",
   "lastOpenFiles": [
+    "Operating System/Fork.md",
+    "Operating System/Synchronization_Tools.md",
+    "Untitled.canvas",
+    "README.md",
     "Operating System/attachments/Pasted image 20250606192459.png",
     "Operating System/attachments"
   ]
