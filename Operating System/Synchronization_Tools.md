@@ -4,6 +4,7 @@
 - Producer : data items를 생산하고, buffer (circular queue로 구현된 shared memory)에 넣음
 - Consumer : buffer에서 data items를 꺼내고 소비함
 
+### Synchronization Problem
 Race condition
 - 여러 process (thread)가 같은 데이터에 동시에 접근하려고 할 때 발생한다 (읽기만 하면 상관없음)
 - 실행 결과가 접근하는 순서와 관련이 있음
@@ -30,7 +31,7 @@ Critical-Section Handling in OS
 	커널 모드에서 실행 중인 프로세스의 선점을 허용함
 	반응성이 더 좋음 -> real-time process에 더 적합함
 
-### Locks
+## Locks
 
 The Basic Idea
 - 어떤 critical section이든 single atomic instruction인 것처럼 실행되도록 보장해야 함
@@ -45,7 +46,7 @@ The Basic Idea
 
 Pthread Locks: Mutex
 - Creating and initializing the lock
-```
+```c
 #include <pthread.h>
 pthread_mutex_t mutex; // global declaration
 
@@ -55,13 +56,13 @@ pthread_mutex_init(&mutex, NULL); // call before first lock
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 ```
 - Acquiring and releasing the lock
-```
+```c
 pthread_mutex_lock(&mutex); // acquire the mutex lock
 pthread_mutex_unlock(&mutex); // release the mutex lock
 ```
 
 Example: Pthread Locks
-```
+```c
 #include <stdio.h>
 #include <pthread.h>
 
@@ -125,9 +126,9 @@ void *thread_des(void *arg)
 
 -> result: 0
 
-### Building a Lock with Hardware Support
+## Building a Lock with Hardware Support
 
-Requirements for Lock
+### Requirements for Lock
 - Mutual Exclusion
 	lock이 작동하여 여러 thread가 critical section에 진입하는 것을 방지하는가?
 - Fairness
@@ -140,4 +141,101 @@ Requirements for Lock
 - Performance
 	lock을 사용하면 time overhead가 늘어남
 
-Controlling Interrupts
+### Controlling Interrupts
+- Disable interrupts for critical sections
+	가장 초기에 mutual exclusion을 제공하는 데 사용된 solution -> single-processor system을 위해 고안됨
+
+```c
+void lock()
+{
+	DisableInterrupts();
+}
+
+void unlock()
+{
+	EnableInterrupts();
+}
+```
+
+Problem:
+- application에 너무 많은 신뢰를 요구함 -> Greedy of malicious program이 process를 독점할 수 있음
+- multiprocessor에서 작동하지 않음
+- 최신 CPU에서 interrupt를 mask, unmask하는 코드가 느리게 실행될 수 있음 (overhead)
+
+### Using a Flag
+- lock 상태인지 아닌지 나타내는 flag 사용
+```c
+typedef struct __lock_t {
+    int flag;
+} lock_t;
+
+void init(lock_t *mutex) {
+    // 0 → 락 사용 가능 (available), 1 → 락이 잠김 (held)
+    mutex->flag = 0;
+}
+
+void lock(lock_t *mutex) {
+    while (mutex->flag == 1) // TEST the flag (플래그 테스트)
+        ; // spin-wait (아무것도 안 함)
+    mutex->flag = 1; // now SET it ! (이제 플래그를 설정)
+}
+
+void unlock(lock_t *mutex) {
+    mutex->flag = 0;
+}
+```
+
+- Problem 1: No Mutual Exclusion
+	첫 번째 thread가 lock()을 호출해 flag를 1로 바꾸기 전에 두 번째 thread로 전환되면 아직 flag는 0이기 때문에 flag를 1로 바꿀 수 있음 -> 두 thread가 lock을 얻었다고 생각함
+- Problem 2: 다른 thread를 기다리는 동안의 Spin-waiting
+
+그래서 Hardware가 지원하는 atomic instruction이 필요하다
+- Test-and-Set instruction (atomic exchange)
+
+### Test-And-Set
+간단한 lock creation을 지원하는 instruction
+
+```c
+int TestAndSet(int *ptr, int new) {
+	int old = *ptr; // fetch old value at ptr
+	*ptr = new; // store ‘new’ into ptr
+	return old; // return the old value
+}
+```
+
+- 이 operation의 순서는 원자적으로 수행됨
+
+A simple spin lock using Test-And-Set
+```c
+typedef struct __lock_t {
+	int flag;
+} lock_t;
+
+void init(lock_t *lock) {
+	// 0 indicates that lock is available,
+	// 1 that it is held
+	lock->flag = 0;
+}
+
+void lock(lock_t *lock) {
+	while (TestAndSet(&lock->flag, 1) == 1)
+		; // spin-wait
+}
+
+void unlock(lock_t *lock) {
+	lock->flag = 0;
+}
+```
+
+- single processor에서 올바르게 작동하려면 preemptive scheduler가 요구됨
+
+### Evaluation Spin Locks
+- Correctness: yes
+	spin lock은 오로지 한 개의 thread만 critical section에 접근할 수 있음
+
+- Fairness: no
+	thread spinning may spin forever
+
+- Performance:
+		12
+
