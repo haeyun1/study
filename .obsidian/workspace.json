@@ -4,11 +4,25 @@
     "type": "split",
     "children": [
       {
-        "id": "9d32baa82c2b0c68",
+        "id": "82097b5f9e57407c",
         "type": "tabs",
         "children": [
           {
-            "id": "72ca02d069061ca6",
+            "id": "0e2a4d8bcabf0004",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Operating System/Synchronization_Tools.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Synchronization_Tools"
+            }
+          },
+          {
+            "id": "f3a47cf76b9aea14",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -21,7 +35,8 @@
               "title": "Synchronization_Tools"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -78,8 +93,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "d1a315cd19f96773",
@@ -95,7 +109,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Operating System/Synchronization_Tools.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +118,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Synchronization_Tools"
+              "title": "Backlinks"
             }
           },
           {
@@ -114,12 +127,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Operating System/Synchronization_Tools.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Synchronization_Tools"
+              "title": "Outgoing links"
             }
           },
           {
@@ -143,16 +155,16 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Operating System/Synchronization_Tools.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Synchronization_Tools"
+              "title": "Outline"
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -169,13 +181,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "72ca02d069061ca6",
+  "active": "f3a47cf76b9aea14",
   "lastOpenFiles": [
-    "Operating System/Fork.md",
-    "Operating System/Synchronization_Tools.md",
-    "Untitled.canvas",
+    "Capstone1/게임 기획서.md",
+    "알고리듬 분석/기말고사 정리/CH 22 Elementary Graph Algorithms.md",
+    "강의 노트 필기/250609 OS 노트 필기.md",
+    "대학생을 위한 실용 금융/치팅페이퍼.md",
+    "알고리듬 분석/기말고사 정리/기말고사 범위.md",
     "README.md",
+    "Untitled.md",
+    "Operating System/Synchronization_Tools.md",
     "Operating System/attachments/Pasted image 20250606192459.png",
+    "대학생을 위한 실용 금융",
+    "알고리듬 분석/Untitled.md",
+    "알고리듬 분석/기말고사 정리",
+    "알고리듬 분석",
+    "Capstone1",
+    "강의 노트 필기",
+    "Operating System/Fork.md",
+    "Untitled.canvas",
     "Operating System/attachments"
   ]
 }
