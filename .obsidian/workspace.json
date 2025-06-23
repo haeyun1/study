@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Operating System/Synchronization_Tools.md",
+                "file": "Capstone1/게임 기획서.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Synchronization_Tools"
+              "title": "게임 기획서"
             }
           }
         ]
@@ -44,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "파일 탐색기"
             }
           },
           {
@@ -161,21 +161,22 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false
     }
   },
   "active": "72ca02d069061ca6",
   "lastOpenFiles": [
-    "Operating System/Fork.md",
+    "Operating System/attachments/Pasted image 20250606192459.png",
+    "Capstone1/게임 기획서.md",
     "Operating System/Synchronization_Tools.md",
+    "Operating System/Fork.md",
     "Untitled.canvas",
     "README.md",
-    "Operating System/attachments/Pasted image 20250606192459.png",
     "Operating System/attachments"
   ]
 }
